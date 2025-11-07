@@ -1,0 +1,93 @@
+# import streamlit as st
+# import pandas as pd
+# import numpy as np
+# import pickle 
+# from sklearn.metrics.pairwise import cosine_similarity
+# import spotipy
+# from spotipy.oauth2 import SpotifyClientCredentials
+
+
+# songs = pd.read_csv("songs.csv")
+# vectorize= pickle.load(open('vectors.pkl','rb'))
+# p1 = pickle.load(open('process.pkl','rb'))
+
+# def Recommend(name):
+#     index= songs[songs["name"]==name].index[0]
+#     song_input= songs[songs["name"]==name]
+#     Tr_input= p1.transform(song_input)
+#     similarity = cosine_similarity(vectorize,Tr_input)
+#     Recommend_movie_index = sorted(list(enumerate(similarity.tolist())),reverse=True,key=lambda x:x[1])[1:6]
+#     Recommend_movie_name=[]
+#     Recommend_movie_track_id=[]
+#     Recommend_poster= []
+#     Recommend_artist=[]
+#     for i in Recommend_movie_index:
+#         Recommend_movie_name.append(songs.iloc[i[0],2])
+#         Recommend_movie_track_id.append(songs.iloc[i[0],3])
+#         Recommend_poster.append(get_poster(songs.iloc[i[0],3]))
+#         Recommend_artist.append(get_artist(songs.iloc[i[0],3]))
+#     return Recommend_movie_name,Recommend_movie_track_id,Recommend_poster,Recommend_artist
+    
+
+# auth_manager = SpotifyClientCredentials(
+#    client_id = 'd2497d19fefb42f6b6792ee2f3471172',
+#     client_secret = '3000a8d3cf1d49769e0d8455027c5343'
+# )
+# sp = spotipy.Spotify(auth_manager=auth_manager)
+
+
+# st.header("Music Recommender")
+
+# movie_list= songs["name"].unique()
+
+# Movie_name= st.selectbox('Choose Movie',movie_list)
+
+
+# def get_poster(id):
+#     track=sp.track(id)
+#     url=[]
+#     if track['album']['images']:
+#                 cover_art_url = track['album']['images'][0]['url']
+#                 # st.text(f"Name: {track['name']}")
+#                 # st.text(f"Artist: {track['artists'][0]['name']}")
+#                 # st.text(f"Cover Art: {cover_art_url}")
+#                 url.append(f"{cover_art_url}")
+#     return url
+# def get_artist(id):
+#     track=sp.track(id)
+#     Artist=[]
+#     if track['album']['images']:
+#                 cover_art_url = track['album']['images'][0]['url']
+#                 # st.text(f"Name: {track['name']}")
+#                 Artist.append(f"{track['artists'][0]['name']}")
+               
+#     return Artist
+     
+
+# if st.button("Recommend"):
+#     names,id,poster,artist= Recommend(Movie_name)
+#     col1,col2,col3=st.columns(3)
+ 
+#     with col1:
+#         st.text(f"Song Name : {names[0]}")
+#         st.text(f"Artist : {artist[0]}")
+#         st.image(poster[0])
+#     with col2:
+#         st.text(f"Song Name : {names[1]}")
+#         st.text(f"Artist : {artist[1]}")
+#         st.image(poster[1])
+#     with col3:
+#         st.text(f"Song Name : {names[2]}")
+#         st.text(f"Artist : {artist[2]}")
+#         st.image(poster[2])
+    
+#     col1,col2,col3=st.columns(3)
+#     with col1:
+#         st.text(f"Song Name : {names[3]}")
+#         st.text(f"Artist : {artist[3]}")
+#         st.image(poster[3])
+#     with col2:
+#         st.text(f"Song Name : {names[4]}")
+#         st.text(f"Artist : {artist[4]}")
+#         st.image(poster[4])
+
