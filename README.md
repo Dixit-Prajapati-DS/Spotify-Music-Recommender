@@ -1,5 +1,7 @@
 <h1>Spotify Music Recommender</h1>
 <p>A music recommendation system built using the Spotify API and Streamlit.</p>
+<h5>App Preview</h5>
+<p>https://spotify-music-recommender-system.streamlit.app/</p>
 
 <hr>
 
